@@ -12,8 +12,8 @@ export class ContatoEmergencia {
     nome: string;
 
     @IsNotEmpty()
-    @Column({ nullable: false })
-    telefone: number;
+    @Column({ length: 20, nullable: false })
+    telefone: string;
 
     @IsNotEmpty()
     @Column({ length: 50, nullable: false })

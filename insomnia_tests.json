@@ -1,0 +1,122 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-12-12T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_segura_vida",
+      "_type": "workspace",
+      "name": "Segura Vida API",
+      "description": "API para gerenciamento de seguros de vida",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:4000"
+      },
+      "parentId": "wrk_segura_vida"
+    },
+    {
+      "_id": "req_get_all_usuarios",
+      "_type": "request",
+      "parentId": "fld_usuarios",
+      "name": "Listar Todos os Usuários",
+      "method": "GET",
+      "url": "{{ _.base_url }}/usuarios",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_get_usuario_by_id",
+      "_type": "request",
+      "parentId": "fld_usuarios",
+      "name": "Buscar Usuário por ID",
+      "method": "GET",
+      "url": "{{ _.base_url }}/usuarios/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_get_usuario_by_nome",
+      "_type": "request",
+      "parentId": "fld_usuarios",
+      "name": "Buscar Usuário por Nome",
+      "method": "GET",
+      "url": "{{ _.base_url }}/usuarios/nome/João",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_create_usuario",
+      "_type": "request",
+      "parentId": "fld_usuarios",
+      "name": "Criar Novo Usuário",
+      "method": "POST",
+      "url": "{{ _.base_url }}/usuarios",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"João Silva\",\n  \"dataNascimento\": 19900515,\n  \"cpf\": \"123.456.789-00\",\n  \"email\": \"joao.silva@email.com\",\n  \"rendaMensal\": 5000.00,\n  \"endereco\": {\n    \"rua\": \"Rua das Flores\",\n    \"numero\": \"123\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01234-567\"\n  },\n  \"contatoEmergencia\": {\n    \"nome\": \"Maria Silva\",\n    \"telefone\": \"11987654321\",\n    \"grauParentesco\": \"Esposa\"\n  }\n}"
+      }
+    },
+    {
+      "_id": "req_update_usuario",
+      "_type": "request",
+      "parentId": "fld_usuarios",
+      "name": "Atualizar Usuário",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/usuarios",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"id\": 1,\n  \"nome\": \"João Silva Santos\",\n  \"dataNascimento\": 19900515,\n  \"cpf\": \"123.456.789-00\",\n  \"email\": \"joao.santos@email.com\",\n  \"rendaMensal\": 5500.00,\n  \"endereco\": {\n    \"id\": 1,\n    \"rua\": \"Rua das Flores\",\n    \"numero\": \"123A\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01234-567\"\n  },\n  \"contatoEmergencia\": {\n    \"id\": 1,\n    \"nome\": \"Maria Silva Santos\",\n    \"telefone\": \"11987654321\",\n    \"grauParentesco\": \"Esposa\"\n  }\n}"
+      }
+    },
+    {
+      "_id": "req_delete_usuario",
+      "_type": "request",
+      "parentId": "fld_usuarios",
+      "name": "Deletar Usuário",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/usuarios/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "fld_usuarios",
+      "_type": "request_group",
+      "parentId": "wrk_segura_vida",
+      "name": "Usuários"
+    }
+  ]
+}
