@@ -14,7 +14,7 @@ import { Usuario } from './usuario/entities/usuario.entity';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'Belly2012.',
+      password: 'root.',
       database: 'db_segura_vida',
       entities: [ContatoEmergencia, Endereco, Usuario],
       synchronize: true,
