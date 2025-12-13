@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Endereco } from '../../endereco/entities/endereco.entity';
 import { ContatoEmergencia } from '../../contatoEmergencia/entities/contatoEmergencia.entity';
 import { IsNotEmpty, IsEmail, IsPositive, isNotEmpty } from 'class-validator';
+import { SeguroVida } from '../../seguroVida/entities/seguroVida.entity';
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
@@ -37,6 +38,8 @@ export class Usuario {
     
     @IsNotEmpty()
     @OneToOne(() => ContatoEmergencia, (contato) => contato.usuario, { cascade: true,nullable: false })
-    @JoinColumn()
     contatoEmergencia: ContatoEmergencia;
+
+    @OneToMany(() => SeguroVida, (usuario) => usuario.usuario, {cascade: true, nullable:false})
+    seguroVida: SeguroVida[]
 }

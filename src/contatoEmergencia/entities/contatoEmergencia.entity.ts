@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
 import { Usuario } from '../../usuario/entities/usuario.entity';
 import { IsNotEmpty } from 'class-validator';
 
@@ -19,6 +19,6 @@ export class ContatoEmergencia {
     @Column({ length: 50, nullable: false })
     grauParentesco: string;
 
-    @OneToOne(() => Usuario, (usuario) => usuario.contatoEmergencia)
+    @OneToOne(() => Usuario, (usuario) => usuario.contatoEmergencia, { onDelete: 'CASCADE' })
     usuario: Usuario;
 }

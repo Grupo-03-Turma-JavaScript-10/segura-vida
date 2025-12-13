@@ -12,14 +12,13 @@ export class UsuarioService {
 
   async findAll(): Promise<Usuario[]> {
     return await this.usuarioRepository.find({
-      relations: ['endereco', 'contatoEmergencia'],
-    });
+      relations:{endereco:true, contatoEmergencia:true, seguroVida: true}});
   }
 
   async findById(id: number): Promise<Usuario> {
     const usuario = await this.usuarioRepository.findOne({
       where: { id },
-      relations: ['endereco', 'contatoEmergencia'],
+      relations: ['endereco', 'contatoEmergencia', 'seguroVida'],
     });
 
     if (!usuario) {
@@ -34,11 +33,18 @@ export class UsuarioService {
       .createQueryBuilder('usuario')
       .leftJoinAndSelect('usuario.endereco', 'endereco')
       .leftJoinAndSelect('usuario.contatoEmergencia', 'contatoEmergencia')
+      .leftJoinAndSelect('usuario.seguroVida', 'seguroVida')
       .where('usuario.nome LIKE :nome', { nome: `%${nome}%` })
       .getMany();
   }
 
   async create(usuario: Usuario): Promise<Usuario> {
+
+    const idade = new Date().getFullYear() - new Date(usuario.dataNascimento).getFullYear();
+    if(idade < 18){
+      throw new HttpException('Usuário deve ter pelo menos 18 anos', HttpStatus.BAD_REQUEST);
+    }
+    
     return await this.usuarioRepository.save(usuario);
   }
 
@@ -59,6 +65,6 @@ export class UsuarioService {
       throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
     }
 
-    await this.usuarioRepository.delete(id);
+    await this.usuarioRepository.remove(usuario);
   }
 }
