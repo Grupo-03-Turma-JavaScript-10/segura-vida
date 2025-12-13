@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { IsNull, Not, Repository } from 'typeorm';
 import { ContatoEmergencia } from '../entities/contatoEmergencia.entity';
 
 @Injectable()
@@ -11,7 +11,10 @@ export class ContatoEmergenciaService {
   ) {}
 
   findAll(): Promise<ContatoEmergencia[]> {
-    return this.contatoRepository.find();
+    return this.contatoRepository.find({
+      relations:  [ 'usuario' ],
+      where:{usuario:{id: Not(IsNull())}}
+    });
   }
 
   async findOne(id: number): Promise<ContatoEmergencia> {

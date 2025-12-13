@@ -59,7 +59,10 @@ export class UsuarioService {
   }
 
   async delete(id: number): Promise<void> {
-    const usuario = await this.findById(id);
+    const usuario = await this.usuarioRepository.findOne(
+      { where: { id } ,
+      relations: ['contatoEmergencia'] },
+    );
 
     if (!usuario) {
       throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
