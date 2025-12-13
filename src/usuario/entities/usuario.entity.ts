@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
 import { Endereco } from '../../endereco/entities/endereco.entity';
 import { ContatoEmergencia } from '../../contatoEmergencia/entities/contatoEmergencia.entity';
-import { IsNotEmpty, IsEmail, IsPositive } from 'class-validator';
+import { IsNotEmpty, IsEmail, IsPositive, isNotEmpty } from 'class-validator';
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
@@ -13,8 +13,8 @@ export class Usuario {
     nome: string;
 
     @IsNotEmpty()
-    @Column({ nullable: false })
-    dataNascimento: number;
+    @Column({ type: 'date', nullable: false })
+    dataNascimento: Date;
 
     @IsNotEmpty()
     @Column({ length: 14, nullable: false })
@@ -29,12 +29,14 @@ export class Usuario {
     @IsPositive()
     @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
     rendaMensal: number;
-
-    @OneToOne(() => Endereco, (endereco) => endereco.usuario, { cascade: true })
+    
+    @IsNotEmpty()
+    @OneToOne(() => Endereco, (endereco) => endereco.usuario, { cascade: true, nullable: false })
     @JoinColumn()
     endereco: Endereco;
-
-    @OneToOne(() => ContatoEmergencia, (contato) => contato.usuario, { cascade: true })
+    
+    @IsNotEmpty()
+    @OneToOne(() => ContatoEmergencia, (contato) => contato.usuario, { cascade: true,nullable: false })
     @JoinColumn()
     contatoEmergencia: ContatoEmergencia;
 }

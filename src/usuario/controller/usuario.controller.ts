@@ -34,9 +34,9 @@ export class UsuarioController {
     @Put()
     @HttpCode(HttpStatus.OK)
     update(@Body() usuario: Usuario): Promise<Usuario> {
-        return this.usuarioService.update(usuario);
+     return this.usuarioService.update(usuario);
     }
-
+ 
     @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT)
     delete(@Param('id') id: number) {
