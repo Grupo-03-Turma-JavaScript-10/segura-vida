@@ -1,55 +1,47 @@
+# 🛡️ Segura Vida - API
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<p align="center">
+  <img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" />
+  <img src="https://img.shields.io/badge/TypeORM-FE0803?style=for-the-badge&logo=typeorm&logoColor=white" alt="TypeORM" />
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## 📋 Descrição
 
-API REST para gerenciamento de seguros de vida, desenvolvida com NestJS, TypeORM e MySQL.
+API REST para gerenciamento de seguros de vida, desenvolvida com **NestJS**, **TypeORM** e **MySQL**. O sistema permite o cadastro de usuários com seus respectivos endereços, contatos de emergência e planos de seguro de vida.
 
-## Equipe de Desenvolvimento
+---
 
-### Product Owner (PO)
-- **Nome:** [Aiyra Johann]
-- **GitHub:** [@aiyrajohann](https://github.com/aiyrajohann)
+## 👥 Equipe de Desenvolvimento
 
-### Desenvolvedores
-- **Dev 1:** [Mamadou] - [@mamadudev](https://github.com/mamadudev)
-- **Dev 2:** [Nathália] - [@nathzeraz](https://github.com/nathzeraz)
-- **Dev 3:** [Andrey] - [@ndreyrsy](https://github.com/andreyrsy)
-- **Dev 4:** [Nicolas] - [@nicolasdonada](https://github.com/nicolasdonada)
-- **Dev 5:** [Ana] - [@auranode](https://github.com/auranode)
+| Função            | Nome         | GitHub                                             |
+| ----------------- | ------------ | -------------------------------------------------- |
+| **Product Owner** | Aiyra Johann | [@aiyrajohann](https://github.com/aiyrajohann)     |
+| **Dev**           | Mamadou      | [@mamadudev](https://github.com/mamadudev)         |
+| **Dev**           | Nathália     | [@nathzeraz](https://github.com/nathzeraz)         |
+| **Dev**           | Andrey       | [@andreyrsy](https://github.com/andreyrsy)          |
+| **Dev**           | Nicolas      | [@nicolasdonada](https://github.com/nicolasdonada) |
+| **Dev**           | Ana          | [@auranode](https://github.com/auranode)           |
+| **Tester**     | Marcos       | [@MarcosCRosa](https://github.com/MarcosCRosa)     |
 
-### Tester (QA)
-- **Nome:** [Marcos]
-- **GitHub:** [@MarcosCRosa](https://github.com/MarcosCRosa)
+---
 
-## Funcionalidades
+## ✨ Funcionalidades
 
-- **CRUD de Usuários**: Criar, listar, buscar, atualizar e deletar usuários
-- **Relacionamentos**: Endereço e Contato de Emergência vinculados ao usuário
-- **Validação de dados**: Validação automática com class-validator
-- **Banco de dados**: MySQL com TypeORM
+- ✅ **CRUD Completo de Usuários**: Criar, listar, buscar, atualizar e deletar usuários
+- ✅ **Gestão de Seguros de Vida**: Criar e listar seguros vinculados a usuários
+- ✅ **Relacionamentos**: Endereço, Contato de Emergência e Seguros vinculados ao usuário
+- ✅ **Validação de dados**: Validação automática com `class-validator`
+- ✅ **Banco de dados**: MySQL com TypeORM
 
-## Estrutura do Projeto
+---
+
+## 🗂️ Estrutura do Projeto
 
 ```
 src/
@@ -73,26 +65,38 @@ src/
 │   ├── services/
 │   │   └── contatoEmergencia.service.ts
 │   └── app.contatoEmergencia.module.ts
+├── seguroVida/
+│   ├── entities/
+│   │   └── seguroVida.entity.ts
+│   ├── controller/
+│   │   └── seguroVida.controller.ts
+│   ├── services/
+│   │   └── seguroVida.service.ts
+│   └── app.seguroVida.module.ts
 ├── app.module.ts
 └── main.ts
 ```
 
-## Pré-requisitos
+## ⚙️ Pré-requisitos
 
 - Node.js (v18 ou superior)
 - MySQL (v8 ou superior)
 - npm ou yarn
 
-## Configuração do Banco de Dados
+---
+
+## 🗄️ Configuração do Banco de Dados
 
 1. Instale e inicie o MySQL
 2. Crie o banco de dados:
+
 ```sql
 CREATE DATABASE db_segura_vida;
 ```
 
 3. Configure as credenciais em `src/app.module.ts`:
-```typescript
+
+````typescript
 TypeOrmModule.forRoot({
   type: 'mysql',
   host: 'localhost',
@@ -100,18 +104,21 @@ TypeOrmModule.forRoot({
   username: 'root',
   password: 'SUA_SENHA_AQUI', // Altere aqui
   database: 'db_segura_vida',
-  entities: [ContatoEmergencia, Endereco, Usuario],
+  entities: [ContatoEmergencia, Endereco, Usuario, SeguroVida],
   synchronize: true,
-})
-```
+});
 
-## Instalação
+---
+
+## 📦 Instalação
 
 ```bash
 $ npm install
-```
+````
 
-## Executar o Projeto
+---
+
+## 🚀 Executar o Projeto
 
 ```bash
 # modo desenvolvimento
@@ -124,18 +131,22 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-A aplicação estará disponível em `http://localhost:4000`
+> A aplicação estará disponível em `http://localhost:4000`
 
-## Documentação da API
+---
 
-### Endpoints Disponíveis
+## 📖 Documentação da API
+
+### 👤 Endpoints de Usuário
 
 #### 1. Listar Todos os Usuários
+
 ```http
 GET /usuarios
 ```
 
 **Resposta de Sucesso (200):**
+
 ```json
 [
   {
@@ -144,7 +155,7 @@ GET /usuarios
     "dataNascimento": 19900515,
     "cpf": "123.456.789-00",
     "email": "joao.silva@email.com",
-    "rendaMensal": 5000.00,
+    "rendaMensal": 5000.0,
     "endereco": {
       "id": 1,
       "rua": "Rua das Flores",
@@ -163,11 +174,13 @@ GET /usuarios
 ```
 
 #### 2. Buscar Usuário por ID
+
 ```http
 GET /usuarios/:id
 ```
 
 **Exemplo:**
+
 ```http
 GET /usuarios/1
 ```
@@ -176,11 +189,13 @@ GET /usuarios/1
 **Resposta de Erro (404):** `{"message": "Usuário não encontrado"}`
 
 #### 3. Buscar Usuários por Nome
+
 ```http
 GET /usuarios/nome/:nome
 ```
 
 **Exemplo:**
+
 ```http
 GET /usuarios/nome/João
 ```
@@ -188,19 +203,21 @@ GET /usuarios/nome/João
 **Resposta de Sucesso (200):** Retorna array com usuários que contêm o nome buscado
 
 #### 4. Criar Novo Usuário
+
 ```http
 POST /usuarios
 Content-Type: application/json
 ```
 
 **Corpo da Requisição:**
+
 ```json
 {
   "nome": "João Silva",
   "dataNascimento": 19900515,
   "cpf": "123.456.789-00",
   "email": "joao.silva@email.com",
-  "rendaMensal": 5000.00,
+  "rendaMensal": 5000.0,
   "endereco": {
     "rua": "Rua das Flores",
     "numero": "123",
@@ -218,17 +235,20 @@ Content-Type: application/json
 **Resposta de Sucesso (201):** Retorna o usuário criado com IDs gerados
 
 **Observações:**
+
 - `dataNascimento` deve estar no formato YYYYMMDD (ex: 19900515 = 15/05/1990)
 - `telefone` deve ser string
 - `rendaMensal` deve ser número decimal
 
 #### 5. Atualizar Usuário
+
 ```http
 PUT /usuarios
 Content-Type: application/json
 ```
 
 **Corpo da Requisição:**
+
 ```json
 {
   "id": 1,
@@ -236,7 +256,7 @@ Content-Type: application/json
   "dataNascimento": 19900515,
   "cpf": "123.456.789-00",
   "email": "joao.santos@email.com",
-  "rendaMensal": 5500.00,
+  "rendaMensal": 5500.0,
   "endereco": {
     "id": 1,
     "rua": "Rua das Flores",
@@ -259,11 +279,13 @@ Content-Type: application/json
 **Observação:** Deve incluir os IDs do usuário, endereço e contato de emergência
 
 #### 6. Deletar Usuário
+
 ```http
 DELETE /usuarios/:id
 ```
 
 **Exemplo:**
+
 ```http
 DELETE /usuarios/1
 ```
@@ -271,69 +293,127 @@ DELETE /usuarios/1
 **Resposta de Sucesso (204):** Sem conteúdo (usuário deletado)
 **Resposta de Erro (404):** `{"message": "Usuário não encontrado"}`
 
-**Observação:** Deleta também o endereço e contato de emergência relacionados (cascade)
+> **Observação:** Deleta também o endereço, contato de emergência e seguros relacionados (cascade)
 
-## Testando com Insomnia
+---
+
+### 🛡️ Endpoints de Seguro de Vida
+
+#### 7. Listar Todos os Seguros de Vida
+
+```http
+GET /segurovida
+```
+
+**Resposta de Sucesso (200):**
+
+```json
+[
+  {
+    "id": 1,
+    "valorAssegurado": 100000.0,
+    "tipoSeguro": "Vida Individual",
+    "usuario": {
+      "id": 1,
+      "nome": "João Silva"
+    }
+  }
+]
+```
+
+#### 8. Criar Novo Seguro de Vida
+
+```http
+POST /segurovida
+Content-Type: application/json
+```
+
+**Corpo da Requisição:**
+
+```json
+{
+  "valorAssegurado": 100000.0,
+  "tipoSeguro": "Vida Individual",
+  "usuario": {
+    "id": 1
+  }
+}
+```
+
+**Resposta de Sucesso (201):** Retorna o seguro criado com ID gerado
+
+**Observações:**
+
+- `valorAssegurado` deve ser número decimal
+- `tipoSeguro` deve ser string (máximo 70 caracteres)
+- O usuário informado deve existir no sistema
+
+---
+
+## 🔗 Diagrama de Relacionamentos
+
+```
+┌─────────────────┐       ┌─────────────────────┐
+│    Usuário      │──1:1──│     Endereço        │
+└─────────────────┘       └─────────────────────┘
+        │
+        ├──1:1────────────┐
+        │                 │
+        │       ┌─────────────────────────┐
+        │       │  Contato de Emergência  │
+        │       └─────────────────────────┘
+        │
+        └──1:N────────────┐
+                          │
+                ┌─────────────────────┐
+                │    Seguro de Vida   │
+                └─────────────────────┘
+```
+
+---
+
+## 🧪 Testando com Insomnia/Postman
 
 1. Importe o arquivo `insomnia_tests.json` no Insomnia
 2. Os endpoints já estarão configurados e prontos para uso
 3. A URL base está configurada como `http://localhost:4000`
 
 **Passo a passo:**
-- Abra o Insomnia
+
+- Abra o Insomnia ou Postman
 - Clique em "Create" → "Import"
 - Selecione o arquivo `insomnia_tests.json`
-- Todos os 6 endpoints estarão disponíveis
+- Todos os endpoints estarão disponíveis
 
-## Run tests
+---
+
+## 🧪 Executar Testes
 
 ```bash
-# unit tests
+# testes unitários
 $ npm run test
 
-# e2e tests
+# testes e2e
 $ npm run test:e2e
 
-# test coverage
+# cobertura de testes
 $ npm run test:cov
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## 📚 Tecnologias Utilizadas
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+| Tecnologia      | Versão | Descrição                                    |
+| --------------- | ------ | -------------------------------------------- |
+| NestJS          | 10.x   | Framework Node.js para aplicações escaláveis |
+| TypeORM         | 0.3.x  | ORM para TypeScript                          |
+| MySQL           | 8.x    | Banco de dados relacional                    |
+| TypeScript      | 5.x    | Superset JavaScript com tipagem              |
+| class-validator | 0.14.x | Validação de DTOs                            |
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+---
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 📄 Licença
 
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Este projeto está sob a licença MIT.
