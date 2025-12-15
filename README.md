@@ -23,26 +23,267 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+API REST para gerenciamento de seguros de vida, desenvolvida com NestJS, TypeORM e MySQL.
 
-## Project setup
+## Equipe de Desenvolvimento
+
+### Product Owner (PO)
+- **Nome:** [Aiyra Johann]
+- **GitHub:** [@aiyrajohann](https://github.com/aiyrajohann)
+
+### Desenvolvedores
+- **Dev 1:** [Mamadou] - [@mamadudev](https://github.com/mamadudev)
+- **Dev 2:** [Nathália] - [@nathzeraz](https://github.com/nathzeraz)
+- **Dev 3:** [Andrey] - [@ndreyrsy](https://github.com/andreyrsy)
+- **Dev 4:** [Nicolas] - [@nicolasdonada](https://github.com/nicolasdonada)
+- **Dev 5:** [Ana] - [@auranode](https://github.com/auranode)
+
+### Tester (QA)
+- **Nome:** [Marcos]
+- **GitHub:** [@MarcosCRosa](https://github.com/MarcosCRosa)
+
+## Funcionalidades
+
+- **CRUD de Usuários**: Criar, listar, buscar, atualizar e deletar usuários
+- **Relacionamentos**: Endereço e Contato de Emergência vinculados ao usuário
+- **Validação de dados**: Validação automática com class-validator
+- **Banco de dados**: MySQL com TypeORM
+
+## Estrutura do Projeto
+
+```
+src/
+├── usuario/
+│   ├── entities/
+│   │   └── usuario.entity.ts
+│   ├── controller/
+│   │   └── usuario.controller.ts
+│   ├── services/
+│   │   └── usuario.service.ts
+│   └── app.usuario.module.ts
+├── endereco/
+│   ├── entities/
+│   │   └── endereco.entity.ts
+│   ├── services/
+│   │   └── endereco.service.ts
+│   └── app.endereco.module.ts
+├── contatoEmergencia/
+│   ├── entities/
+│   │   └── contatoEmergencia.entity.ts
+│   ├── services/
+│   │   └── contatoEmergencia.service.ts
+│   └── app.contatoEmergencia.module.ts
+├── app.module.ts
+└── main.ts
+```
+
+## Pré-requisitos
+
+- Node.js (v18 ou superior)
+- MySQL (v8 ou superior)
+- npm ou yarn
+
+## Configuração do Banco de Dados
+
+1. Instale e inicie o MySQL
+2. Crie o banco de dados:
+```sql
+CREATE DATABASE db_segura_vida;
+```
+
+3. Configure as credenciais em `src/app.module.ts`:
+```typescript
+TypeOrmModule.forRoot({
+  type: 'mysql',
+  host: 'localhost',
+  port: 3306,
+  username: 'root',
+  password: 'SUA_SENHA_AQUI', // Altere aqui
+  database: 'db_segura_vida',
+  entities: [ContatoEmergencia, Endereco, Usuario],
+  synchronize: true,
+})
+```
+
+## Instalação
 
 ```bash
 $ npm install
 ```
 
-## Compile and run the project
+## Executar o Projeto
 
 ```bash
-# development
+# modo desenvolvimento
 $ npm run start
 
-# watch mode
+# modo watch (recarrega automaticamente)
 $ npm run start:dev
 
-# production mode
+# modo produção
 $ npm run start:prod
 ```
+
+A aplicação estará disponível em `http://localhost:4000`
+
+## Documentação da API
+
+### Endpoints Disponíveis
+
+#### 1. Listar Todos os Usuários
+```http
+GET /usuarios
+```
+
+**Resposta de Sucesso (200):**
+```json
+[
+  {
+    "id": 1,
+    "nome": "João Silva",
+    "dataNascimento": 19900515,
+    "cpf": "123.456.789-00",
+    "email": "joao.silva@email.com",
+    "rendaMensal": 5000.00,
+    "endereco": {
+      "id": 1,
+      "rua": "Rua das Flores",
+      "numero": "123",
+      "cidade": "São Paulo",
+      "cep": "01234-567"
+    },
+    "contatoEmergencia": {
+      "id": 1,
+      "nome": "Maria Silva",
+      "telefone": "11987654321",
+      "grauParentesco": "Esposa"
+    }
+  }
+]
+```
+
+#### 2. Buscar Usuário por ID
+```http
+GET /usuarios/:id
+```
+
+**Exemplo:**
+```http
+GET /usuarios/1
+```
+
+**Resposta de Sucesso (200):** Retorna os dados do usuário
+**Resposta de Erro (404):** `{"message": "Usuário não encontrado"}`
+
+#### 3. Buscar Usuários por Nome
+```http
+GET /usuarios/nome/:nome
+```
+
+**Exemplo:**
+```http
+GET /usuarios/nome/João
+```
+
+**Resposta de Sucesso (200):** Retorna array com usuários que contêm o nome buscado
+
+#### 4. Criar Novo Usuário
+```http
+POST /usuarios
+Content-Type: application/json
+```
+
+**Corpo da Requisição:**
+```json
+{
+  "nome": "João Silva",
+  "dataNascimento": 19900515,
+  "cpf": "123.456.789-00",
+  "email": "joao.silva@email.com",
+  "rendaMensal": 5000.00,
+  "endereco": {
+    "rua": "Rua das Flores",
+    "numero": "123",
+    "cidade": "São Paulo",
+    "cep": "01234-567"
+  },
+  "contatoEmergencia": {
+    "nome": "Maria Silva",
+    "telefone": "11987654321",
+    "grauParentesco": "Esposa"
+  }
+}
+```
+
+**Resposta de Sucesso (201):** Retorna o usuário criado com IDs gerados
+
+**Observações:**
+- `dataNascimento` deve estar no formato YYYYMMDD (ex: 19900515 = 15/05/1990)
+- `telefone` deve ser string
+- `rendaMensal` deve ser número decimal
+
+#### 5. Atualizar Usuário
+```http
+PUT /usuarios
+Content-Type: application/json
+```
+
+**Corpo da Requisição:**
+```json
+{
+  "id": 1,
+  "nome": "João Silva Santos",
+  "dataNascimento": 19900515,
+  "cpf": "123.456.789-00",
+  "email": "joao.santos@email.com",
+  "rendaMensal": 5500.00,
+  "endereco": {
+    "id": 1,
+    "rua": "Rua das Flores",
+    "numero": "123A",
+    "cidade": "São Paulo",
+    "cep": "01234-567"
+  },
+  "contatoEmergencia": {
+    "id": 1,
+    "nome": "Maria Silva Santos",
+    "telefone": "11987654321",
+    "grauParentesco": "Esposa"
+  }
+}
+```
+
+**Resposta de Sucesso (200):** Retorna o usuário atualizado
+**Resposta de Erro (404):** `{"message": "Usuário não encontrado"}`
+
+**Observação:** Deve incluir os IDs do usuário, endereço e contato de emergência
+
+#### 6. Deletar Usuário
+```http
+DELETE /usuarios/:id
+```
+
+**Exemplo:**
+```http
+DELETE /usuarios/1
+```
+
+**Resposta de Sucesso (204):** Sem conteúdo (usuário deletado)
+**Resposta de Erro (404):** `{"message": "Usuário não encontrado"}`
+
+**Observação:** Deleta também o endereço e contato de emergência relacionados (cascade)
+
+## Testando com Insomnia
+
+1. Importe o arquivo `insomnia_tests.json` no Insomnia
+2. Os endpoints já estarão configurados e prontos para uso
+3. A URL base está configurada como `http://localhost:4000`
+
+**Passo a passo:**
+- Abra o Insomnia
+- Clique em "Create" → "Import"
+- Selecione o arquivo `insomnia_tests.json`
+- Todos os 6 endpoints estarão disponíveis
 
 ## Run tests
 

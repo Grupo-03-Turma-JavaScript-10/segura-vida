@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Endereco } from '../../endereco/entities/endereco.entity';
 import { ContatoEmergencia } from '../../contatoEmergencia/entities/contatoEmergencia.entity';
 import { IsNotEmpty, IsEmail, IsPositive } from 'class-validator';
+import { SeguroVida } from '../../seguroVida/entities/seguroVida.entity';
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
@@ -13,8 +14,8 @@ export class Usuario {
     nome: string;
 
     @IsNotEmpty()
-    @Column({ nullable: false })
-    dataNascimento: number;
+    @Column({ type: 'date', nullable: false })
+    dataNascimento: Date;
 
     @IsNotEmpty()
     @Column({ length: 14, nullable: false })
@@ -30,11 +31,19 @@ export class Usuario {
     @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
     rendaMensal: number;
 
-    @OneToOne(() => Endereco, (endereco) => endereco.usuario, { cascade: true })
+    @IsNotEmpty()
+    @OneToOne(() => Endereco, (endereco) => endereco.usuario, { cascade: true, nullable: false })
     @JoinColumn()
     endereco: Endereco;
 
-    @OneToOne(() => ContatoEmergencia, (contato) => contato.usuario, { cascade: true })
+    @OneToOne(() => ContatoEmergencia, (contato) => contato.usuario, { 
+        cascade: true,
+        onDelete: 'CASCADE',
+        nullable: true 
+    })
     @JoinColumn()
     contatoEmergencia: ContatoEmergencia;
+
+    @OneToMany(() => SeguroVida, (seguro) => seguro.usuario, { cascade: true })
+    seguroVida: SeguroVida[];
 }

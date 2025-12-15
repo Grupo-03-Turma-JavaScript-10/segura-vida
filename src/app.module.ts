@@ -6,6 +6,8 @@ import { ContatoEmergenciaModule } from './contatoEmergencia/app.contatoEmergenc
 import { ContatoEmergencia } from './contatoEmergencia/entities/contatoEmergencia.entity';
 import { Endereco } from './endereco/entities/endereco.entity';
 import { Usuario } from './usuario/entities/usuario.entity';
+import { SeguroVida } from './seguroVida/entities/seguroVida.entity';
+import { SeguroVidaModule } from './seguroVida/app.seguroVida.module';
 
 @Module({
   imports: [
@@ -16,12 +18,13 @@ import { Usuario } from './usuario/entities/usuario.entity';
       username: 'root',
       password: 'root',
       database: 'db_segura_vida',
-      entities: [ContatoEmergencia, Endereco, Usuario],
+      entities: [ContatoEmergencia, Endereco, Usuario, SeguroVida],
       synchronize: true,
     }),
     UsuarioModule,
     EnderecoModule,
     ContatoEmergenciaModule,
+    SeguroVidaModule
   ],
   controllers: [],
   providers: [],
