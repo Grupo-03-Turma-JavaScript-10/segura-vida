@@ -8,12 +8,12 @@ export class ContatoEmergenciaService {
   constructor(
     @InjectRepository(ContatoEmergencia)
     private readonly contatoRepository: Repository<ContatoEmergencia>,
-  ) {}
+  ) { }
 
   findAll(): Promise<ContatoEmergencia[]> {
     return this.contatoRepository.find({
-      relations:  [ 'usuario' ],
-      where:{usuario:{id: Not(IsNull())}}
+      relations: ['usuario'],
+      where: { usuario: { id: Not(IsNull()) } }
     });
   }
 
@@ -33,5 +33,19 @@ export class ContatoEmergenciaService {
     if (result.affected === 0) {
       throw new NotFoundException('Contato de emergência não encontrado');
     }
+  }
+
+  async create(contato: ContatoEmergencia): Promise<ContatoEmergencia> {
+    return await this.contatoRepository.save(contato);
+  }
+
+  async update(contato: ContatoEmergencia): Promise<ContatoEmergencia> {
+    const contatoExistente = await this.findOne(contato.id);
+
+    if (!contatoExistente) {
+      throw new NotFoundException('Contato de emergência não encontrado');
+    }
+
+    return await this.contatoRepository.save(contato);
   }
 }
