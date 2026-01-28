@@ -10,6 +10,7 @@ import { Usuario } from './usuario/entities/usuario.entity';
 import { SeguroVida } from './seguroVida/entities/seguroVida.entity';
 import { SeguroVidaModule } from './seguroVida/app.seguroVida.module';
 import { ProdService } from './data/services/prod.service';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { ProdService } from './data/services/prod.service';
     ContatoEmergenciaModule,
     SeguroVidaModule
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
