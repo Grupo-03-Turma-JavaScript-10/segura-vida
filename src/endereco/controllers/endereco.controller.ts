@@ -1,10 +1,12 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, HttpCode, HttpStatus } from "@nestjs/common";
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBody, ApiResponse } from '@nestjs/swagger';
 import { EnderecoService } from "../services/endereco.service";
 import { Endereco } from "../entities/endereco.entity";
+import { CreateEnderecoDto } from '../dto/create-endereco.dto';
+import { UpdateEnderecoDto } from '../dto/update-endereco.dto';
 
 @ApiTags('enderecos')
-@Controller("/endereco")
+@Controller("/enderecos")
 export class EnderecoController {
     constructor(private readonly enderecoService: EnderecoService) { }
 
@@ -22,14 +24,19 @@ export class EnderecoController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() endereco: Endereco): Promise<Endereco> {
-        return this.enderecoService.create(endereco);
+    @ApiOperation({ summary: 'Criar novo endereço' })
+    @ApiBody({ type: CreateEnderecoDto })
+    @ApiResponse({ status: 201, description: 'Endereço criado com sucesso' })
+    create(@Body() createEnderecoDto: CreateEnderecoDto): Promise<Endereco> {
+        return this.enderecoService.create(createEnderecoDto as any);
     }
 
     @Put()
     @HttpCode(HttpStatus.OK)
-    update(@Body() endereco: Endereco): Promise<Endereco> {
-        return this.enderecoService.update(endereco);
+    @ApiOperation({ summary: 'Atualizar endereço' })
+    @ApiBody({ type: UpdateEnderecoDto })
+    update(@Body() updateEnderecoDto: UpdateEnderecoDto): Promise<Endereco> {
+        return this.enderecoService.update(updateEnderecoDto as any);
     }
 
     @Delete('/:id')
