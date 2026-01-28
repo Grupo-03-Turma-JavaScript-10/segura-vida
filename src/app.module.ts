@@ -1,3 +1,4 @@
+import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioModule } from './usuario/app.usuario.module';
@@ -8,18 +9,16 @@ import { Endereco } from './endereco/entities/endereco.entity';
 import { Usuario } from './usuario/entities/usuario.entity';
 import { SeguroVida } from './seguroVida/entities/seguroVida.entity';
 import { SeguroVidaModule } from './seguroVida/app.seguroVida.module';
+import { ProdService } from './data/services/prod.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'db_segura_vida',
-      entities: [ContatoEmergencia, Endereco, Usuario, SeguroVida],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      useClass: ProdService,
+      imports: [ConfigModule],
     }),
     UsuarioModule,
     EnderecoModule,
