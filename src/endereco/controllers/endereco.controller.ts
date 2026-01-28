@@ -1,7 +1,9 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, HttpCode, HttpStatus } from "@nestjs/common";
+import { ApiTags } from '@nestjs/swagger';
 import { EnderecoService } from "../services/endereco.service";
 import { Endereco } from "../entities/endereco.entity";
 
+@ApiTags('enderecos')
 @Controller("/endereco")
 export class EnderecoController {
     constructor(private readonly enderecoService: EnderecoService) { }
