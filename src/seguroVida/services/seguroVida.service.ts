@@ -1,21 +1,28 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { SeguroVida } from "../entities/seguroVida.entity";
+import { CreateSeguroVidaDto } from "../dto/create-seguro.dto";
 import { Repository } from "typeorm";
+import { Usuario } from "../../usuario/entities/usuario.entity";
 
 @Injectable()
 export class SeguroVidaService {
     constructor(
         @InjectRepository(SeguroVida)
-        private readonly seguroRepository: Repository<SeguroVida>
+        private readonly seguroRepository: Repository<SeguroVida>,
+        @InjectRepository(Usuario)
+        private readonly usuarioRepository: Repository<Usuario>
     ) { }
 
     findAll(): Promise<SeguroVida[]> {
-        return this.seguroRepository.find();
+        return this.seguroRepository.find({ relations: ['usuario'] });
     }
 
     async findOne(id: number): Promise<SeguroVida> {
-        const seguroVida = await this.seguroRepository.findOneBy({ id });
+        const seguroVida = await this.seguroRepository.findOne({ 
+            where: { id },
+            relations: ['usuario']
+        });
 
         if (!seguroVida) {
             throw new NotFoundException('Seguro não encontrado!');
@@ -24,8 +31,22 @@ export class SeguroVidaService {
         return seguroVida;
     }
 
-    async create(seguroVida: SeguroVida): Promise<SeguroVida> {
-        return await this.seguroRepository.save(seguroVida);
+    async create(createSeguroDto: CreateSeguroVidaDto): Promise<SeguroVida> {
+        const usuario = await this.usuarioRepository.findOne({ 
+            where: { id: createSeguroDto.usuarioId } 
+        });
+
+        if (!usuario) {
+            throw new NotFoundException('Usuário não encontrado!');
+        }
+
+        const seguro = this.seguroRepository.create({
+            valorAssegurado: createSeguroDto.valorAssegurado,
+            tipoSeguro: createSeguroDto.tipoSeguro,
+            usuario
+        });
+
+        return await this.seguroRepository.save(seguro);
     }
 
     async update(seguroVida: SeguroVida): Promise<SeguroVida> {
